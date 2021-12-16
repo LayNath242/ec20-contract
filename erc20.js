@@ -69,7 +69,42 @@ async function transferBalance(wallet, recipient, amount) {
     await waitForTx(provider, tx.hash)
 }
 
+// Mint more contract balance
+async function mintBalance(wallet, address, amount) {
+    const erc20Instance = new ethers.Contract(
+        constants.ERC20_ADDRESS,
+        constants.ContractABIs.DigitalLearning.abi, 
+        wallet
+    );
+    console.log(`Mint balance ${amount} by ${address}`);
+
+    const tx = await erc20Instance.mint(
+        address,
+        amount,
+        { gasPrice: constants.GASPRICE, gasLimit: constants.GASLIMIT }
+    );
+    await waitForTx(provider, tx.hash)
+}
+
+// Burn contract balance
+async function BurnBalance(wallet, address, amount) {
+    const erc20Instance = new ethers.Contract(
+        constants.ERC20_ADDRESS,
+        constants.ContractABIs.DigitalLearning.abi, 
+        wallet
+    );
+    console.log(`Burn balance ${amount} from ${address}`);
+
+    const tx = await erc20Instance.burn(
+        address,
+        amount,
+        { gasPrice: constants.GASPRICE, gasLimit: constants.GASLIMIT }
+    );
+    await waitForTx(provider, tx.hash)
+}
+
 
 // deploy(wallet)
 // checkBalance("0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09")
 // transferBalance(wallet, "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09", 200000)
+// BurnBalance(wallet, "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09", 2000000000000000)

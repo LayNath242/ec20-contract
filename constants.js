@@ -17,6 +17,8 @@ module.exports.PrivKey = "<Your private key>";
 // Contract Address
 module.exports.ERC20_ADDRESS = "<Contract Address>";
 
+
+// binance testnet
 module.exports.DEFAULT_SOURCE_ID = 97;
 module.exports.DEFAULT_DEST_ID = 1;
 module.exports.DEFAULT_URL = "https://data-seed-prebsc-1-s1.binance.org:8545/"
