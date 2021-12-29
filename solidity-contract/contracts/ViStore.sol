@@ -7,8 +7,8 @@ import "./ERC20/ERC20PresetMinterPauser.sol";
 contract VIStore is ERC20PresetMinterPauser {
 
     /**
-     * @dev Allows overriding the name, symbol & decimal of the base ERC20 contract
+     * Allows overriding the name, symbol & decimal of the base ERC20 contract
      */
-    constructor(string memory name, string memory symbol, uint8 decimals) public ERC20PresetMinterPauser(name, symbol) {
+    constructor(string memory name, string memory symbol) public ERC20PresetMinterPauser(name, symbol) {
     }
 }
