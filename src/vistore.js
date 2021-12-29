@@ -334,23 +334,3 @@ async function revokeRole(wallet, role, address) {
     const tx = await erc20Instance.revokeRole(role, address);
     await waitForTx(constants.PROVIDER, tx.hash)
 }
-
-
-
-
-// approve(constants.WALLET, "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09", 20000)
-// decreaseAllowance(constants.WALLET, "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09", 20000)
-// minte(constants.WALLET, "0x7ef6c005bd86F1D5c7a2f41A2ec2bddd636beb66", 1000000)
-// burnFrom(constants.WALLET, "0x7ef6c005bd86F1D5c7a2f41A2ec2bddd636beb66", 8000)
-// transfer(constants.WALLET, "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09", 20000)
-// burn(constants.WALLET, 1000)
-checkTotalSupply()
-// checkBalance("0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09");
-// checkAllowance("0x7ef6c005bd86F1D5c7a2f41A2ec2bddd636beb66", "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09")
-// transferFrom(constants.WALLET, "0x7ef6c005bd86F1D5c7a2f41A2ec2bddd636beb66", "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09", 10000)
-// minterRole()
-// grantRole(constants.WALLET, "0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6", "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09")
-// revokeRole(constants.WALLET, "0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6", "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09")
-// hasRole("0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6", "0x5b3F084Dd296DBda4a655E83Fc84d39C2b5a5C09")
-// unpause(constants.WALLET)
-// pause(constants.WALLET)
