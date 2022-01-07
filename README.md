@@ -6,7 +6,7 @@
 **Note**: This is Ethereum testnet [faucet](https://faucet.dimensions.network) use to test 
 - Create .env file and input as .evn.example
 - run 
-``sh
+``
     ./init.sh
 ``
 
