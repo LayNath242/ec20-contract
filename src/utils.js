@@ -1,4 +1,5 @@
 const ethers = require('ethers');
+const constants = require('./constants');
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -13,18 +14,22 @@ const waitForTx = async (provider, hash) => {
 
 function generateMnemonic() {
     const mnemonic = ethers.Wallet.createRandom().mnemonic;
-    console.log(`Mnemonic: ${mnemonic}`);
     return mnemonic
 }
 
 function generatePrivateKey(mnemonic) {
     const wallet = ethers.Wallet.fromMnemonic(mnemonic);
-    console.log(`Private key is: ${wallet.privateKey}`);
     return wallet.privateKey
+}
+
+function wallet(private_key){
+    const wallet = new ethers.Wallet(private_key, constants.PROVIDER);
+    return wallet
 }
 
 module.exports = {
     waitForTx,
     generateMnemonic,
-    generatePrivateKey
+    generatePrivateKey,
+    wallet,
 };

@@ -3,7 +3,7 @@ const constants = require('./constants');
 const { waitForTx } = require("./utils")
 
 // deploy smart contract to block chain
-async function deploy(wallet, name, symbol) {
+module.exports.deploy = async function deploy(wallet, name, symbol) {
     const factory = new ethers.ContractFactory(
         constants.ContractABIs.VISTORE.abi,
         constants.ContractABIs.VISTORE.bytecode,
@@ -11,172 +11,151 @@ async function deploy(wallet, name, symbol) {
     );
     const contract = await factory.deploy(name, symbol);
     await contract.deployed();
-    console.log(`✓ ERC20 contract deployed at Address ${contract.address}`)
+    return contract.address
 }
 
 ///-----------------Contract detail info----------------------------------------------
 
 // check contract decimal
-async function decimal(){
+module.exports.decimal = async function decimal(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const decimal = await erc20Instance.decimals();
-    console.log(`decimal is :${decimal}` );
     return decimal;
 }
 
-// check contract decimal
-async function name(){
-    const erc20Instance = new ethers.Contract(
-        constants.ERC20_ADDRESS,
-        constants.ContractABIs.VISTORE.abi,
-        constants.PROVIDER
-    );
-    const name = await erc20Instance.name();
-    console.log(`name is :${name}` );
-    return name;
-}
-
 // check contract name
-async function name(){
+module.exports.name =  async function name(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const name = await erc20Instance.name();
-    console.log(`name is :${name}` );
     return name;
 }
 
 // check contract symbol
-async function symbol(){
+module.exports.symbol = async function symbol(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const symbol = await erc20Instance.symbol();
-    console.log(`symbol is :${symbol}` );
     return symbol;
 }
 
 // check contract status pause or not
-async function pause(){
+module.exports.pauseStatus = async function pauseStatus(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const pause = await erc20Instance.paused();
-    console.log(`Your contract is pause: ${pause}` );
     return pause;
 }
 
 ///-------------------------Contract role info----------------------------------------
 
 // check contract admin role in byte
-async function defaultAdminRole(){
+module.exports.defaultAdminRole = async function defaultAdminRole(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const adminRole = await erc20Instance.DEFAULT_ADMIN_ROLE();
-    console.log(`Default admin role in bytes :${adminRole}` );
     return adminRole;
 }
 
 // check contract minter role in byte
-async function minterRole(){
+module.exports.minterRole = async function minterRole(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const minterRole = await erc20Instance.MINTER_ROLE()
-    console.log(`Minter role in bytes :${minterRole}` )
     return minterRole;
 }
 
 // check contract paused role in byte 
-async function pausedRole(){
+module.exports.pausedRole =async function pausedRole(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const pauseRole = await erc20Instance.PAUSER_ROLE()
-    console.log(`Pauser role in bytes :${pauseRole}` )
     return pauseRole;
 }
 
 // count role member for each role
-async function roleMemberCount(role){
+module.exports.roleMemberCount = async function roleMemberCount(role){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const roleMember = await erc20Instance.getRoleMemberCount(role)
-    console.log(` There are ${roleMember} member in this role` )
     return roleMember;
 }
 
 // check you are member of role or not
-async function hasRole(role, address){
+module.exports.hasRole = async function hasRole(role, address){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER
     );
     const isMember = await erc20Instance.hasRole(role, address)
-    console.log(`You are memeber of this role: ${isMember}` )
     return isMember;
 }
 
 ///-------------------------Contract balance info----------------------------------------
 
 // check balance in your contract
-async function checkBalance(address){
+module.exports.checkBalance = async function checkBalance(address){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER,
     );
     const balance = await erc20Instance.balanceOf(address)
-    console.log(`Account ${address} has a balance of ${balance}` )
+    return balance
 }
 
 // check balance in your contract
-async function checkTotalSupply(){
+module.exports.checkTotalSupply = async function checkTotalSupply(){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER,
     );
-    const balance = await erc20Instance.totalSupply()
-    console.log(`Your total supply is: ${balance}` )
+    const supply = await erc20Instance.totalSupply()
+    return supply
 }
 
 // check allowance balance in your contract
-async function checkAllowance(owner, spender){
+module.exports.checkAllowance = async function checkAllowance(owner, spender){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi,
         constants.PROVIDER,
     );
     const allowance = await erc20Instance.allowance(owner, spender)
-    console.log(`Your allowance balance is: ${allowance}` )
+    return allowance
 }
 
 ///------------------Mint and burn balance---------------------------------------------------
 
 // Minte balance by minter 
-async function minte(wallet, to, amount){
+module.exports.mint = async function mint(wallet, to, amount){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -189,7 +168,7 @@ async function minte(wallet, to, amount){
 }
 
 // Burn your balance
-async function burn(wallet, amount){
+module.exports.burn = async function burn(wallet, amount){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -202,7 +181,7 @@ async function burn(wallet, amount){
 }
 
 // Burn your from your allowance
-async function burnFrom(wallet, address, amount){
+module.exports.burnFrom = async function burnFrom(wallet, address, amount){
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -217,7 +196,7 @@ async function burnFrom(wallet, address, amount){
 ///------------------Transfer and allowance------------------------------------------
 
 // transfer balance 
-async function transfer(wallet, recipient, amount) {
+module.exports.transfer = async function transfer(wallet, recipient, amount) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -230,7 +209,7 @@ async function transfer(wallet, recipient, amount) {
 }
 
 // transfer balance from allowance account 
-async function transferFrom(wallet, sender, recipient, amount) {
+module.exports.transferFrom = async function transferFrom(wallet, sender, recipient, amount) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -243,7 +222,7 @@ async function transferFrom(wallet, sender, recipient, amount) {
 }
 
 // allow other account to spend your balance (Allowance)
-async function approve(wallet, spender, amount) {
+module.exports.approve = async function approve(wallet, spender, amount) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -256,7 +235,7 @@ async function approve(wallet, spender, amount) {
 }
 
 // increase allowance that you approve
-async function increaseAllowance(wallet, spender, addAmount) {
+module.exports.increaseAllowance = async function increaseAllowance(wallet, spender, addAmount) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -269,7 +248,7 @@ async function increaseAllowance(wallet, spender, addAmount) {
 }
 
 // decrease allowance that you approve
-async function decreaseAllowance(wallet, spender, subtractedValue) {
+module.exports.decreaseAllowance = async function decreaseAllowance(wallet, spender, subtractedValue) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -282,7 +261,7 @@ async function decreaseAllowance(wallet, spender, subtractedValue) {
 }
 
 // pause transfer
-async function pause(wallet) {
+module.exports.pause = async function pause(wallet) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -295,7 +274,7 @@ async function pause(wallet) {
 }
 
 // unpause transfer
-async function unpause(wallet) {
+module.exports.unpause = async function unpause(wallet) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -310,7 +289,7 @@ async function unpause(wallet) {
 // ----------------------role and permission-------------------------------
 
 // grant role to other by admin
-async function grantRole(wallet, role, address) {
+module.exports.grantRole = async function grantRole(wallet, role, address) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
@@ -323,7 +302,7 @@ async function grantRole(wallet, role, address) {
 }
 
 // revoke role by admin
-async function revokeRole(wallet, role, address) {
+module.exports.revokeRole = async function revokeRole(wallet, role, address) {
     const erc20Instance = new ethers.Contract(
         constants.ERC20_ADDRESS,
         constants.ContractABIs.VISTORE.abi, 
