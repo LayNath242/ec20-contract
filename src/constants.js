@@ -4,14 +4,17 @@ require('dotenv').config();
 // smart contact abi use to call function from your contract
 const CONTRACT_PATH = "../solidity-contract/build/contracts"
 const ContractABIs = {
-    VISTORE: require(CONTRACT_PATH + "/VIStore.json"),
+    STABLECOIN: require(CONTRACT_PATH + "/STABLECOIN.json"),
 }
 module.exports.ContractABIs = ContractABIs;
-module.exports.ERC20_ADDRESS = process.env.ERC20_ADDRESS;
+module.exports.ERC20_ADDRESS = "0x209373B5047f1F8a619977D3C9bCB0A6b10126c1";
+
+module.exports.privateKey = process.env.PRIVATEKEY;
 
 module.exports.PROVIDER = new ethers.providers.JsonRpcProvider (
-    process.env.BLOCKCHAIN_URL, {chainId: Number(process.env.CHAIN_ID)}
+    "https://indranet-rpc.selendra.org", {chainId: 222}
 );
 
 module.exports.GASLIMIT = 2000000;
 module.exports.GASPRICE = 10000000000;
+

@@ -12,6 +12,14 @@ const waitForTx = async (provider, hash) => {
     }
 }
 
+const expandDecimals = (amount, decimals = 18) => {
+    return ethers.utils.parseUnits(String(amount), decimals);
+}
+
+const formatDecimals = (amount, decimals = 18) => {
+    return ethers.utils.formatEther(amount);
+}
+
 function generateMnemonic() {
     const mnemonic = ethers.Wallet.createRandom().mnemonic;
     return mnemonic
@@ -32,4 +40,6 @@ module.exports = {
     generateMnemonic,
     generatePrivateKey,
     wallet,
+    expandDecimals,
+    formatDecimals
 };

@@ -2,7 +2,7 @@
   "name": "vi-store-contract",
   "version": "1.0.0",
   "description": "smart contract",
-  "main": "src/vistore.js",
+  "main": "src/STABLECOIN.js",
   "author": "nath.selendra@gmail.com",
   "license": "LGPL-3.0",
   "dependencies": {
