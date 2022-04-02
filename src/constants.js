@@ -7,7 +7,7 @@ const ContractABIs = {
     STABLECOIN: require(CONTRACT_PATH + "/STABLECOIN.json"),
 }
 module.exports.ContractABIs = ContractABIs;
-module.exports.ERC20_ADDRESS = "0x209373B5047f1F8a619977D3C9bCB0A6b10126c1";
+module.exports.ERC20_ADDRESS = "0x62877dDCd49aD22f5eDfc6ac108e9a4b5D2bD88B";
 
 module.exports.privateKey = process.env.PRIVATEKEY;
 
